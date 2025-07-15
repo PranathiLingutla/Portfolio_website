@@ -163,7 +163,7 @@
                     <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
                     <button type="submit" class="btn btn2">Submit</button>
                 </form>
-                <span id="msg">Message sent successfully</span>
+                <span id="msg" style="display:none;">Message sent successfully</span>
 
             </div>
         </div>
@@ -204,11 +204,16 @@
     e.preventDefault()
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(response => {
-        msg.innerHTML = "Message sent successfully"
-        setTimeout(function(){msg.innerHTML = ""}, 5000)
-        form.reset()
-        console.log('Success!', response)
-      })
+  msg.style.display = "block";
+  msg.innerHTML = "Message sent successfully";
+  setTimeout(function(){
+    msg.innerHTML = "";
+    msg.style.display = "none";
+  }, 5000);
+  form.reset();
+  console.log('Success!', response);
+})
+
       .catch(error => console.error('Error!', error.message))
   })
 </script>
